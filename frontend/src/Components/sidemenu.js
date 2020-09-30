@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import PeopleIcon from '@material-ui/icons/People';
 import { useHistory } from "react-router-dom";
+import { useOktaAuth } from '@okta/okta-react';
 
 const drawerWidth = 240;
 
@@ -80,10 +81,24 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
 }));
-
-
+const LogButton = () => {
+  const { authState, authService } = useOktaAuth();
+  const login = () => authService.login('/');
+  const logout = () => authService.logout('/');
+  if ( authState.isPending ) {
+    return(
+    <div>Loading authentication...</div>
+  );} else if( !authState.isAuthenticated ) {
+    return (
+      <Button color="inherit"  alignItems="right" onClick={login}>Login</Button>
+  );}else {
+    return(
+      <Button color="inherit"  alignItems="right" onClick={logout}>Logout</Button>
+  );}
+}
 
 export default function PersistentDrawerLeft() {
+
   let history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
@@ -119,7 +134,9 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" className={classes.title}>
             ניהול אספקה בעת הקורונה
           </Typography>
-          <Button color="inherit"  alignItems="right">Login</Button>
+         <LogButton />
+
+        {/*  <Button color="inherit"  alignItems="right">Login</Button>*/}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -153,11 +170,19 @@ export default function PersistentDrawerLeft() {
           <ListItemText primary={"הוספת משתמש"} />
           </ListItem>
 
-          <ListItem button key={"dashboard"} onClick={() => {
-            history.push("/dashbord")
+          <ListItem button key={"additem"} onClick={() => {
+            history.push("/additem")
           }}>
           <ListItemIcon><PeopleIcon /> </ListItemIcon>
-          <ListItemText primary={"dashbord"} />
+          <ListItemText primary={"additem"} />
+          </ListItem>
+
+
+          <ListItem button key={"addvolunteer"} onClick={() => {
+            history.push("/addvolunteer")
+          }}>
+          <ListItemIcon><PeopleIcon /> </ListItemIcon>
+          <ListItemText primary={"הוספת מתנדב"} />
           </ListItem>
 
           <ListItem button key={"home"} onClick={() => {
