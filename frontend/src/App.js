@@ -13,7 +13,6 @@ import FormContainer from "./Components/FormContainer.jsx"
 import axios from 'axios';
 import { Security, LoginCallback  } from '@okta/okta-react';
 import Footer from "./Components/footer.jsx";
-import AddItem from "./Components/additem.jsx";
 
 
 const OKTA_DOMAIN = process.env.REACT_APP_DOMAIN;
