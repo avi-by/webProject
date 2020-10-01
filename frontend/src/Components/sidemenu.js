@@ -97,6 +97,20 @@ const LogButton = () => {
   );}
 }
 
+const Addvolunteer =() => {
+  let history = useHistory();
+  const { authState, authService } = useOktaAuth();
+  if( authState.isAuthenticated ) {
+   return (
+    <ListItem button key={"additem"} onClick={() => {
+      history.push("/additem")
+    }}>
+    <ListItemIcon><PeopleIcon /> </ListItemIcon>
+    <ListItemText primary={"הוספת מתנדב"} />
+    </ListItem>
+  );}else {
+    return(<div/>);}
+}
 export default function PersistentDrawerLeft() {
 
   let history = useHistory();
@@ -163,16 +177,8 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={text} />
             </ListItem>
           ))}*/}
-        
 
-
-          <ListItem button key={"additem"} onClick={() => {
-            history.push("/additem")
-          }}>
-          <ListItemIcon><PeopleIcon /> </ListItemIcon>
-          <ListItemText primary={"הוספת מתנדב"} />
-          </ListItem>
-
+          <Addvolunteer />
           <ListItem button key={"home"} onClick={() => {
             history.push("/")
           }}>
