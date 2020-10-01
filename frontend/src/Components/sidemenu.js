@@ -163,23 +163,11 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary={text} />
             </ListItem>
           ))}*/}
-          <ListItem button key={"add user"} onClick={() => {
-            history.push("/user")
-          }}>
-          <ListItemIcon><PeopleIcon /> </ListItemIcon>
-          <ListItemText primary={"הוספת משתמש"} />
-          </ListItem>
+        
+
 
           <ListItem button key={"additem"} onClick={() => {
             history.push("/additem")
-          }}>
-          <ListItemIcon><PeopleIcon /> </ListItemIcon>
-          <ListItemText primary={"additem"} />
-          </ListItem>
-
-
-          <ListItem button key={"addvolunteer"} onClick={() => {
-            history.push("/addvolunteer")
           }}>
           <ListItemIcon><PeopleIcon /> </ListItemIcon>
           <ListItemText primary={"הוספת מתנדב"} />

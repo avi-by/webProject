@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('<p>hi there</p>');
+  res.send('hi there');
 });
 
 router.post('/',function(req,res,next) {

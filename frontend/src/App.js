@@ -36,39 +36,29 @@ const config = {
 class App extends Component {
   constructor(props) {
       super(props);
-   this.state ={
-     data: [],
-   };
-   this.getdata=this.getdata.bind(this);
+   this.state={};
+
+
 
  }
 
 
-  getdata(){
-   axios.get('/users')
-   .then(data=>this.setState({data:data.data}))
- }
   render(){
   return (
 	<div className="App">
 <Router>
  <Security {...config}>
 <Drawer />
+
     <Switch>
      <Route path={CALLBACK_PATH} component={LoginCallback} />
-      <Route exact path="/">
-        home
-      </Route>
-      <Route path="/user" >
-
-      <p>dn{this.state.data}</p>
-      </Route>
-      <Route path="/additem" component={FormContainer}>
-      </Route>
-      <Route path="/addvolunteer" component={AddItem}/>
+      <Route exact path="/">home</Route>
+      <Route path="/additem" component={FormContainer}/>
+      {/*<Route path="/addvolunteer" component={AddItem}/>*/}
     </Switch>
 
     <Footer />
+
   </Security>
 </Router>
 	</div>
