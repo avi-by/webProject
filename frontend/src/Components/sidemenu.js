@@ -102,12 +102,26 @@ const Addvolunteer =() => {
   const { authState, authService } = useOktaAuth();
   if( authState.isAuthenticated ) {
    return (
+	<React.Fragment>
     <ListItem button key={"additem"} onClick={() => {
       history.push("/additem")
     }}>
     <ListItemIcon><PeopleIcon /> </ListItemIcon>
     <ListItemText primary={"הוספת מתנדב"} />
     </ListItem>
+	<ListItem button key={"addAdress"} onClick={() => {
+      history.push("/addAddress")
+    }}>
+    <ListItemIcon><PeopleIcon /> </ListItemIcon>
+    <ListItemText primary={"add address"} />
+    </ListItem>
+	<ListItem button key={"listOfAddress"} onClick={() => {
+      history.push("/listOfAddresses")
+    }}>
+    <ListItemIcon><PeopleIcon /> </ListItemIcon>
+    <ListItemText primary={"list of addresses"} />
+    </ListItem>
+	</React.Fragment>
   );}else {
     return(<div/>);}
 }

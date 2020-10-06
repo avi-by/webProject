@@ -1,0 +1,172 @@
+
+import React, { Component } from 'react'
+import api from '../api'
+
+import styled from 'styled-components'
+
+const Title = styled.h1.attrs({
+    className: 'h1',
+})``
+
+const Wrapper = styled.div.attrs({
+    className: 'form-group',
+})`
+    margin: 0 30px;
+`
+
+const Label = styled.label`
+    margin: 5px;
+`
+
+const InputText = styled.input.attrs({
+    className: 'form-control',
+})`
+    margin: 5px;
+`
+
+const Button = styled.button.attrs({
+    className: `btn btn-primary`,
+})`
+    margin: 15px 15px 15px 5px;
+`
+
+const CancelButton = styled.a.attrs({
+    className: `btn btn-danger`,
+})`
+    margin: 15px 15px 15px 5px;
+`
+
+class AddAddress extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            id: '',
+            street: '',
+            number: '',
+			city: '',
+			date: '',
+        }
+    }
+
+    handleChangeInputName = async event => {
+        const name = event.target.value
+        this.setState({ name })
+    }
+	
+	handleChangeInputStreet = async event => {
+        const street = event.target.value
+        this.setState({ street })
+    }
+
+	handleChangeInputCity = async event => {
+        const city = event.target.value
+        this.setState({ city })
+    }
+
+	handleChangeInputDate = async event => {
+        const date = event.target.value
+        this.setState({ date })
+    }
+
+
+
+    handleChangeInputID = async event => {
+        const id = event.target.validity.valid
+            ? event.target.value
+            : this.state.id
+
+        this.setState({ id })
+    }
+	
+	
+	 handleChangeInputID = async event => {
+        const number = event.target.validity.valid
+            ? event.target.value
+            : this.state.number
+
+        this.setState({ number })
+    }
+
+   /** handleChangeInputTime = async event => {
+        const time = event.target.value
+        this.setState({ time })
+    }**/
+
+    handleIncludeAddress = async () => {
+        const { id, street, number, city, date } = this.state
+        /*const arrayTime = time.split('/')
+        const payload = { name, rating, time: arrayTime }
+
+        await api.insertMovie(payload).then(res => {
+            window.alert(`Movie inserted successfully`)
+            this.setState({
+                name: '',
+                rating: '',
+                time: '',
+            })
+        })
+		*/
+    }
+
+    render() {
+        const { id, street, number, city, date } = this.state
+        return (
+            <Wrapper>
+                <Title>Create new address</Title>
+
+                
+                <Label>ID: </Label>
+                <InputText
+                    type="number"
+                    step="1"
+                    min="0"
+                    pattern="[0-9]+([,\.][0-9]+)?"
+                    value={id}
+                    onChange={this.handleChangeInputID}
+                />
+				
+				<Label>Street: </Label>
+                <InputText
+                    type="text"
+                    value={street}
+                    onChange={this.handleChangeInputStreet}
+                />
+
+				<Label>Number: </Label>
+                <InputText
+                    type="number"
+                    step="1"
+                    min="0"
+                    pattern="[0-9]+([,\.][0-9]+)?"
+                    value={number}
+                    onChange={this.handleChangeInputNumber}
+                />
+				
+				<Label>City: </Label>
+                <InputText
+                    type="text"
+                    value={city}
+                    onChange={this.handleChangeInputCity}
+                />
+				
+				<Label>Date: </Label>
+                <InputText
+                    type="text"
+                    value={date}
+                    onChange={this.handleChangeInputDate}
+                />
+                /**<Label>Time: </Label>
+                <InputText
+                    type="text"
+                    value={time}
+                    onChange={this.handleChangeInputTime}
+                />**/
+ <Button onClick={this.handleIncludeMovie}>Add address</Button>
+                <CancelButton href={'/movies/list'}>Cancel</CancelButton>
+            </Wrapper>
+        )
+    }
+}
+
+export default AddAddress

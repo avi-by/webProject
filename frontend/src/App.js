@@ -10,9 +10,12 @@ import {
   Link
 } from "react-router-dom";
 import FormContainer from "./Components/FormContainer.jsx"
+import AddressList from "./Components/AddressList.jsx"
+import AddAddress from "./Components/AddAddress.jsx"
 import axios from 'axios';
 import { Security, LoginCallback  } from '@okta/okta-react';
 import Footer from "./Components/footer.jsx";
+
 
 
 const OKTA_DOMAIN = process.env.REACT_APP_DOMAIN;
@@ -53,6 +56,8 @@ class App extends Component {
      <Route path={CALLBACK_PATH} component={LoginCallback} />
       <Route exact path="/">home</Route>
       <Route path="/additem" component={FormContainer}/>
+	  <Route path="/listOfAddresses" component={AddressList}/>
+	   <Route path="/addAddress" component={AddAddress}/>
       {/*<Route path="/addvolunteer" component={AddItem}/>*/}
     </Switch>
 
