@@ -1,132 +1,135 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
-import PeopleIcon from '@material-ui/icons/People';
-import { useHistory } from "react-router-dom";
-import { useOktaAuth } from '@okta/okta-react';
+import React from "react";
+import clsx from "clsx";
+import {makeStyles, useTheme} from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import LogButton from "./LoginButton";
+import PeopleIcon from "@material-ui/icons/People";
+import {useHistory} from "react-router-dom";
+import {useOktaAuth} from "@okta/okta-react";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: "flex"
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end"
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth,
+    marginLeft: -drawerWidth
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginLeft: 0,
-  },
+    marginLeft: 0
+  }
 }));
-const LogButton = () => {
-  const { authState, authService } = useOktaAuth();
-  const login = () => authService.login('/');
-  const logout = () => authService.logout('/');
-  if ( authState.isPending ) {
-    return(
-    <div>Loading authentication...</div>
-  );} else if( !authState.isAuthenticated ) {
-    return (
-      <Button color="inherit"  alignItems="right" onClick={login}>Login</Button>
-  );}else {
-    return(
-      <Button color="inherit"  alignItems="right" onClick={logout}>Logout</Button>
-  );}
-}
 
-const Addvolunteer =() => {
+const Addvolunteer = () => {
   let history = useHistory();
-  const { authState, authService } = useOktaAuth();
-  if( authState.isAuthenticated ) {
-   return (
-	<React.Fragment>
-    <ListItem button key={"additem"} onClick={() => {
-      history.push("/additem")
-    }}>
-    <ListItemIcon><PeopleIcon /> </ListItemIcon>
-    <ListItemText primary={"הוספת מתנדב"} />
-    </ListItem>
-	<ListItem button key={"addAdress"} onClick={() => {
-      history.push("/addAddress")
-    }}>
-    <ListItemIcon><PeopleIcon /> </ListItemIcon>
-    <ListItemText primary={"add address"} />
-    </ListItem>
-	<ListItem button key={"listOfAddress"} onClick={() => {
-      history.push("/listOfAddresses")
-    }}>
-    <ListItemIcon><PeopleIcon /> </ListItemIcon>
-    <ListItemText primary={"list of addresses"} />
-    </ListItem>
-	</React.Fragment>
-  );}else {
-    return(<div/>);}
-}
+  const {authState, authService} = useOktaAuth();
+  if (authState.isAuthenticated) {
+    return (
+      <React.Fragment>
+        <ListItem
+          button
+          key={"additem"}
+          onClick={() => {
+            history.push("/adduser");
+          }}
+        >
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"הוספת מתנדב"} />
+        </ListItem>
+        <ListItem
+          button
+          key={"addAdress"}
+          onClick={() => {
+            history.push("/addAddress");
+          }}
+        >
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"add address"} />
+        </ListItem>
+        <ListItem
+          button
+          key={"listOfAddress"}
+          onClick={() => {
+            history.push("/listOfAddresses");
+          }}
+        >
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"list of addresses"} />
+        </ListItem>
+      </React.Fragment>
+    );
+  } else {
+    return <div />;
+  }
+};
 export default function PersistentDrawerLeft() {
-
   let history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
@@ -146,7 +149,7 @@ export default function PersistentDrawerLeft() {
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: open
         })}
       >
         <Toolbar>
@@ -162,9 +165,9 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" className={classes.title}>
             ניהול אספקה בעת הקורונה
           </Typography>
-         <LogButton />
+          <LogButton />
 
-        {/*  <Button color="inherit"  alignItems="right">Login</Button>*/}
+          {/*  <Button color="inherit"  alignItems="right">Login</Button>*/}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -173,12 +176,16 @@ export default function PersistentDrawerLeft() {
         anchor="left"
         open={open}
         classes={{
-          paper: classes.drawerPaper,
+          paper: classes.drawerPaper
         }}
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </div>
 
@@ -193,21 +200,26 @@ export default function PersistentDrawerLeft() {
           ))}*/}
 
           <Addvolunteer />
-          <ListItem button key={"home"} onClick={() => {
-            history.push("/")
-          }}>
-          <ListItemIcon><PeopleIcon /> </ListItemIcon>
-          <ListItemText primary={"homepage"} />
+          <ListItem
+            button
+            key={"home"}
+            onClick={() => {
+              history.push("/");
+            }}
+          >
+            <ListItemIcon>
+              <PeopleIcon />{" "}
+            </ListItemIcon>
+            <ListItemText primary={"homepage"} />
           </ListItem>
         </List>
       </Drawer>
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: open,
+          [classes.contentShift]: open
         })}
       >
         <div className={classes.drawerHeader} />
-
       </main>
     </div>
   );
