@@ -54,7 +54,7 @@ class FormContainer extends Component {
     e.preventDefault();
     let userData = this.state.newUser;
 
-    fetch("/adduser", {
+    fetch("/usersdb/adduser", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -63,7 +63,6 @@ class FormContainer extends Component {
       }
     })
       .then(response => {
-        response.json();
         console.log(response);
 
           console.log(response);
@@ -82,7 +81,9 @@ class FormContainer extends Component {
                 },
               });
           } else {
-          alert(response.statusText);
+            //console.log(response);
+            response.json().then((value) => {alert(value)});
+
           }
         }
         //alert("User added successfully");

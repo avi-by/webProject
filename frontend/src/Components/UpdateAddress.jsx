@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import api from '../api'
+
 
 import styled from 'styled-components'
 
 const Title = styled.h1.attrs({
     className: 'h1',
-})``
+})
+``
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -60,7 +61,7 @@ class AddressUpdate extends Component {
 
         this.setState({ id })
     }
-	
+
 	handleChangeInputNumber = async event => {
         const number = event.target.validity.valid
             ? event.target.value
@@ -73,7 +74,7 @@ class AddressUpdate extends Component {
         const street = event.target.value
         this.setState({ street })
     }
-	
+
 	handleChangeInputDate = async event => {
         const date = event.target.value
         this.setState({ date })
@@ -103,8 +104,8 @@ class AddressUpdate extends Component {
     }
 
     componentDidMount = async () => {
-        
-		const { id } = this.state
+
+		//const { id } = this.state
 		await fetch(`/db/ReadRecord/${this.props.match.params.id}`,{
         method: "GET",
         headers: {
@@ -112,11 +113,9 @@ class AddressUpdate extends Component {
           'Content-Type': 'application/json'
         },
 		}).then(response => {
-			
-			window.alert(`Address pushed successfully`)
-			console.log(response);
-			  window.alert(response)
-		      response.json().then(
+
+				console.log(response);
+			    response.json().then(
 			  (data)=>{
 				  console.log(data);
 			  this.setState({
@@ -124,16 +123,16 @@ class AddressUpdate extends Component {
 				  number: data[0].number,
 				  city: data[0].city,
 				  date: data[0].date,
-			  
+
               })});
         })
     }
 
 
-	
-	
-	
-	
+
+
+
+
     render() {
         const { street, number, city, date } = this.state
         return (
@@ -170,8 +169,8 @@ class AddressUpdate extends Component {
                     onChange={this.handleChangeInputDate}
                 />
 
-                <Button onClick={this.handleUpdateAddress }>Update Movie</Button>
-                <CancelButton href={'/'}>Cancel</CancelButton>
+                <Button onClick={this.handleUpdateAddress }>Update address</Button>
+                <CancelButton href={'/listOfAddresses'}>Cancel</CancelButton>
             </Wrapper>
         )
     }

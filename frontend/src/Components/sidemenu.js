@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Addvolunteer = () => {
+const AdminItems = () => {
   let history = useHistory();
   const {authState, authService} = useOktaAuth();
   if (authState.isAuthenticated) {
@@ -95,6 +95,16 @@ const Addvolunteer = () => {
             <PeopleIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"הוספת מתנדב"} />
+        </ListItem>
+
+        <ListItem
+          button
+          key={"userslist"}
+          onClick={() => {history.push("/userlist");}}>
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"ניהול משתמשים"} />
         </ListItem>
 
         <ListItem
@@ -188,9 +198,9 @@ export default function PersistentDrawerLeft() {
         </div>
 
         <List>
-        
 
-          <Addvolunteer />
+
+          <AdminItems />
           <ListItem
             button
             key={"home"}

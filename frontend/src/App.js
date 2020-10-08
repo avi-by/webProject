@@ -8,10 +8,12 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import FormContainer from "./Components/FormContainer.jsx";
+import AddUser from "./Components/AddUser.jsx";
 import AddressList from "./Components/AddressList.jsx";
 import AddAddress from "./Components/AddAddress.jsx";
 import UpdateAddress from "./Components/UpdateAddress.jsx";
+import UpdateUser from './Components/UpdateUser';
+import UsersList from "./Components/UsersList";
 //import axios from 'axios';
 import { Security, LoginCallback  } from '@okta/okta-react';
 import Footer from "./Components/footer.jsx";
@@ -41,14 +43,12 @@ class App extends Component {
     <Switch>
      <Route path={config.CALLBACK_PATH} component={LoginCallback} />
       <Route exact path="/">home</Route>
-      <Route path="/adduser" component={FormContainer}/>
-	  <Route path="/listOfAddresses" component={AddressList}/>
-	   <Route path="/addAddress" component={AddAddress}/>
-     <Route
-          path="/addresses/update/:id"
-          exact
-          component={UpdateAddress}
-      />
+      <Route exact path="/adduser" component={AddUser}/>
+      <Route exact path="/userlist" component={UsersList}/>
+    <Route  path="/listOfAddresses" component={AddressList}/>
+	   <Route  path="/addAddress" component={AddAddress}/>
+     <Route path="/addresses/update/:id" exact component={UpdateAddress}/>
+          <Route path="/userlist/update/:id" exact component={UpdateUser}/>
         </Switch>
 
     <Footer />
