@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import api from '../api'
 
@@ -36,12 +35,12 @@ const CancelButton = styled.a.attrs({
     margin: 15px 15px 15px 5px;
 `
 
-class AddAddress extends Component {
+class AddressUpdate extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            id: '',
+            id: this.props.match.params.id,
             street: '',
             number: '',
 			city: '',
@@ -49,27 +48,10 @@ class AddAddress extends Component {
         }
     }
 
-    handleChangeInputName = async event => {
-        const name = event.target.value
-        this.setState({ name })
-    }
-	
-	handleChangeInputStreet = async event => {
-        const street = event.target.value
-        this.setState({ street })
-    }
-
-	handleChangeInputCity = async event => {
+    handleChangeInputCity = async event => {
         const city = event.target.value
         this.setState({ city })
     }
-
-	handleChangeInputDate = async event => {
-        const date = event.target.value
-        this.setState({ date })
-    }
-
-
 
     handleChangeInputID = async event => {
         const id = event.target.validity.valid
@@ -79,8 +61,7 @@ class AddAddress extends Component {
         this.setState({ id })
     }
 	
-	
-	 handleChangeInputID = async event => {
+	handleChangeInputNumber = async event => {
         const number = event.target.validity.valid
             ? event.target.value
             : this.state.number
@@ -88,85 +69,112 @@ class AddAddress extends Component {
         this.setState({ number })
     }
 
-   /** handleChangeInputTime = async event => {
-        const time = event.target.value
-        this.setState({ time })
-    }**/
-
-    handleIncludeAddress = async () => {
-        const { id, street, number, city, date } = this.state
-        /*const arrayTime = time.split('/')
-        const payload = { name, rating, time: arrayTime }
-
-        await api.insertMovie(payload).then(res => {
-            window.alert(`Movie inserted successfully`)
-            this.setState({
-                name: '',
-                rating: '',
-                time: '',
-            })
-        })
-		*/
+    handleChangeInputStreet = async event => {
+        const street = event.target.value
+        this.setState({ street })
+    }
+	
+	handleChangeInputDate = async event => {
+        const date = event.target.value
+        this.setState({ date })
     }
 
-    render() {
+    handleUpdateAddress = async () => {
         const { id, street, number, city, date } = this.state
+		const payload = { street, number, city, date }
+
+		await fetch(`/db/UpdateRecord/${id}`,{
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).then(response => {
+        window.alert(`Address updated successfully`)
+            this.setState({
+				id: '',
+                street: '',
+                number: '',
+				city: '',
+				date: '',
+            })
+    })
+    }
+
+    componentDidMount = async () => {
+        
+		const { id } = this.state
+		await fetch(`/db/ReadRecord/${this.props.match.params.id}`,{
+        method: "GET",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+		}).then(response => {
+			
+			window.alert(`Address pushed successfully`)
+			console.log(response);
+			  window.alert(response)
+		      response.json().then(
+			  (data)=>{
+				  console.log(data);
+			  this.setState({
+                  street: 'moshe',
+				  number: data[0].number,
+				  city: data[0].city,
+				  date: data[0].date,
+			  
+              })});
+        })
+    }
+
+
+	
+	
+	
+	
+    render() {
+        const { street, number, city, date } = this.state
         return (
             <Wrapper>
-                <Title>Create new address</Title>
+                <Title>Update Address</Title>
 
-                
-                <Label>ID: </Label>
-                <InputText
-                    type="number"
-                    step="1"
-                    min="0"
-                    pattern="[0-9]+([,\.][0-9]+)?"
-                    value={id}
-                    onChange={this.handleChangeInputID}
-                />
-				
-				<Label>Street: </Label>
+
+               <Label>Street: </Label>
                 <InputText
                     type="text"
                     value={street}
                     onChange={this.handleChangeInputStreet}
                 />
 
-				<Label>Number: </Label>
+				<Label>NumberHome: </Label>
                 <InputText
                     type="number"
-                    step="1"
                     min="0"
-                    pattern="[0-9]+([,\.][0-9]+)?"
                     value={number}
                     onChange={this.handleChangeInputNumber}
                 />
-				
-				<Label>City: </Label>
+
+                <Label>city: </Label>
                 <InputText
                     type="text"
                     value={city}
                     onChange={this.handleChangeInputCity}
                 />
-				
-				<Label>Date: </Label>
+
+				<Label>date: </Label>
                 <InputText
                     type="text"
                     value={date}
                     onChange={this.handleChangeInputDate}
                 />
-                /**<Label>Time: </Label>
-                <InputText
-                    type="text"
-                    value={time}
-                    onChange={this.handleChangeInputTime}
-                />**/
- <Button onClick={this.handleIncludeMovie}>Add address</Button>
-                <CancelButton href={'/movies/list'}>Cancel</CancelButton>
+
+                <Button onClick={this.handleUpdateAddress }>Update Movie</Button>
+                <CancelButton href={'/'}>Cancel</CancelButton>
             </Wrapper>
         )
     }
 }
 
-export default AddAddress
+export default AddressUpdate

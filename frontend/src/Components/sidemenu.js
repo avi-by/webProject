@@ -90,15 +90,13 @@ const Addvolunteer = () => {
         <ListItem
           button
           key={"additem"}
-          onClick={() => {
-            history.push("/adduser");
-          }}
-        >
+          onClick={() => {history.push("/adduser");}}>
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"הוספת מתנדב"} />
         </ListItem>
+
         <ListItem
           button
           key={"addAdress"}
@@ -190,14 +188,7 @@ export default function PersistentDrawerLeft() {
         </div>
 
         <List>
-          {/*{['הוספת משתמש', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text} onClick={() => {
-              history.push("/user")
-            }}>
-            <ListItemIcon><PeopleIcon /> </ListItemIcon>
-            <ListItemText primary={text} />
-            </ListItem>
-          ))}*/}
+        
 
           <Addvolunteer />
           <ListItem

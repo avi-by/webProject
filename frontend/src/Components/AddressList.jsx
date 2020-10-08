@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactTable from 'react-table'
-import api from '../api'
+
 
 import styled from 'styled-components'
 
@@ -23,22 +23,22 @@ const Delete = styled.div`
 
 
 
-class UpdateMovie extends Component {
+class UpdateAddress extends Component {
     updateUser = event => {
         event.preventDefault()
 
-        window.location.href = `/update/wait with this`
+        window.location.href = `/addresses/update/${this.props.id}`
     }
-	
-	
-	
+
+
+
 
     render() {
         return <Update onClick={this.updateUser}>Update</Update>
     }
 }
 
-class DeleteMovie extends Component {
+class DeleteAddress extends Component {
     deleteUser = event => {
         event.preventDefault()
 
@@ -96,7 +96,7 @@ class AddressList extends Component {
                 isLoading: false,
             })
         })**/
-		
+
 	    await fetch('/db/ReadAll',{
             method: "GET",
             headers: {
@@ -111,14 +111,14 @@ class AddressList extends Component {
               })
             })
         })
-		
-		
-		
+
+
+
     }
 
     render() {
         const { addresses, isLoading } = this.state
-        console.log('TCL: MoviesList -> render -> movies', addresses)
+        //console.log('TCL: MoviesList -> render -> movies', addresses)
 
         const columns = [
             {
@@ -152,7 +152,7 @@ class AddressList extends Component {
                 Cell: function(props) {
                     return (
                         <span>
-                            <DeleteMovie id={props.original.id} />
+                            <DeleteAddress id={props.original.id} />
                         </span>
                     )
                 },
@@ -163,21 +163,18 @@ class AddressList extends Component {
                 Cell: function(props) {
                     return (
                         <span>
-                            <UpdateMovie id={props.original._id} />
+                            <UpdateAddress id={props.original.id} />
                         </span>
                     )
                 },
             },
         ]
 
-        let showTable = true
-        if (!addresses.length) {
-            showTable = false
-        }
+
 
         return (
             <Wrapper>
-                {showTable && (
+                { (
                     <ReactTable
                         data={addresses}
                         columns={columns}
