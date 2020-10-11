@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import api from '../api'
+
+import Loc from "./LocationIQ";
 
 import styled from 'styled-components'
 
@@ -60,7 +61,7 @@ class AddAddress extends Component {
 
         this.setState({ id })
     }
-	
+
 	handleChangeInputNumber = async event => {
         const number = event.target.validity.valid
             ? event.target.value
@@ -73,7 +74,7 @@ class AddAddress extends Component {
         const street = event.target.value
         this.setState({ street })
     }
-	
+
 	handleChangeInputDate = async event => {
         const date = event.target.value
         this.setState({ date })
@@ -81,7 +82,15 @@ class AddAddress extends Component {
 
     handleIncludeAddress = async () => {
         const { id, street, number, city, date } = this.state
-        const payload = { id, street, number, city, date }
+        var cordinate = [];
+        await Loc.search(city+" "+street+" "+number)
+        .then((json) => {
+
+            cordinate.push(json[0].lat);
+            cordinate.push(json[0].lon);
+
+        })
+        const payload = { id, street, number, city, date ,cordinate}
 
 		await fetch('/db/AddRecord',{
         method: "POST",
@@ -116,8 +125,8 @@ class AddAddress extends Component {
                     value={id}
                     onChange={this.handleChangeInputID}
                 />
-				
-				
+
+
                 <Label>Street: </Label>
                 <InputText
                     type="text"

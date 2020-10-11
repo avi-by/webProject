@@ -13,8 +13,10 @@
     "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "haversine": "^1.1.1",
     "http-errors": "~1.6.3",
     "mongodb": "^3.6.2",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "node-kmeans": "^1.1.9"
   }
 }

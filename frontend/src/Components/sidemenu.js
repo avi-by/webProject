@@ -99,6 +99,16 @@ const AdminItems = () => {
 
         <ListItem
           button
+          key={"Placement"}
+          onClick={() => {history.push("/placement");}}>
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"שיבוץ מתנדבים"} />
+        </ListItem>
+
+        <ListItem
+          button
           key={"userslist"}
           onClick={() => {history.push("/userlist");}}>
           <ListItemIcon>

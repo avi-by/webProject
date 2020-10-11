@@ -19,7 +19,7 @@ import { Security, LoginCallback  } from '@okta/okta-react';
 import Footer from "./Components/footer.jsx";
 import config from "./Components/auth.js";
 
-
+import Placement from "./Components/Placement";
 
 
 
@@ -35,6 +35,7 @@ class App extends Component {
 
   render(){
   return (
+
 	<div className="App">
 <Router>
  <Security {...config}>
@@ -49,12 +50,15 @@ class App extends Component {
 	   <Route  path="/addAddress" component={AddAddress}/>
      <Route path="/addresses/update/:id" exact component={UpdateAddress}/>
           <Route path="/userlist/update/:id" exact component={UpdateUser}/>
+<Route path="/placement" component={Placement}/>
         </Switch>
 
     <Footer />
 
   </Security>
 </Router>
+
+
 	</div>
 	);
   }
