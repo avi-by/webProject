@@ -110,7 +110,7 @@ const VolunteerItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"מטלות שלי"} />
+          <ListItemText primary={"My Addresses"} />
         </ListItem>
 
 
@@ -124,7 +124,7 @@ const VolunteerItems = () => {
                   <ListItemIcon>
                     <PeopleIcon />{" "}
                   </ListItemIcon>
-                  <ListItemText primary={"chat"} />
+                  <ListItemText primary={"Chat"} />
                 </ListItem>
 
       </React.Fragment>
@@ -163,7 +163,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"הוספת מתנדב"} />
+          <ListItemText primary={"Add Volunteer"} />
         </ListItem>
 
         <ListItem
@@ -173,7 +173,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"שיבוץ מתנדבים"} />
+          <ListItemText primary={"Volunteer Placement"} />
         </ListItem>
 
         <ListItem
@@ -183,7 +183,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"ניהול משתמשים"} />
+          <ListItemText primary={"Volunteer Managmanet"} />
         </ListItem>
 
         <ListItem
@@ -193,7 +193,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"מטלות לביצוע"} />
+          <ListItemText primary={"Current placment"} />
         </ListItem>
 
         <ListItem
@@ -206,7 +206,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"add address"} />
+          <ListItemText primary={"Add Address"} />
         </ListItem>
         <ListItem
           button
@@ -218,7 +218,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"list of addresses"} />
+          <ListItemText primary={"List of the addresses"} />
         </ListItem>
 
         <ListItem
@@ -231,7 +231,7 @@ const AdminItems = () => {
           <ListItemIcon>
             <PeopleIcon />{" "}
           </ListItemIcon>
-          <ListItemText primary={"chat"} />
+          <ListItemText primary={"Chat"} />
         </ListItem>
       </React.Fragment>
     );

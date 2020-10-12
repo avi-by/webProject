@@ -36,7 +36,7 @@ function LoadingButton(props) {
       disabled={isLoading}
       onClick={!isLoading ? handleClick : null}
     >
-      {isLoading ? "Loading…" : "שבץ"}
+      {isLoading ? "Loading…" : "Start Placment"}
     </Button>
   );
 }
@@ -211,7 +211,7 @@ class Placement extends Component {
     return (
       <div>
         <Container>
-          <Title>הצבת מתנדבים</Title>
+          <Title>Volunteer Placement</Title>
           <Row className="justify-content-md-center">
             <Col md="auto">
               <Label>choose city:</Label>
@@ -251,7 +251,7 @@ class Placement extends Component {
             )}
             {this.state.group.length>0? (
               <Col>
-              <Button onClick={this.sendButtonHandle }variant="success" >אשר חלוקה</Button>
+              <Button onClick={this.sendButtonHandle }variant="success" >Accept</Button>
               </Col>
             ) : (
               <div />

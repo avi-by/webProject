@@ -5,7 +5,17 @@ import Input from "./formComponents/Input";
 import CheckBox from "./formComponents/CheckBox";
 import Select from "./formComponents/Select";
 import Button from "./formComponents/Button";
+import styled from 'styled-components'
 
+const Title = styled.h1.attrs({
+    className: 'h1',
+})``
+
+const Wrapper = styled.div.attrs({
+    className: 'form-group',
+})`
+    margin: 0 30px;
+`
 class FormContainer extends Component {
   constructor(props) {
     super(props);
@@ -124,6 +134,9 @@ class FormContainer extends Component {
   render() {
     console.log(this.state.newUser);
     return (
+      <Wrapper>
+          <Title>Create Address</Title>
+
       <form className="container-fluid" onSubmit={this.handleFormSubmit}>
         <Input
           inputType={"text"}
@@ -201,6 +214,7 @@ class FormContainer extends Component {
         />{" "}
         {/* Clear the form */}
       </form>
+        </Wrapper>
     );
   }
 }
