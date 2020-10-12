@@ -8,7 +8,7 @@ export default class Maps extends Component {
   state = {
     lat: 31.776674,
     lng: 35.234329,
-    zoom: 15,
+    zoom: 14,
     locations: [],
     group: [],
     activeMark: null

@@ -119,7 +119,7 @@ class AddressUpdate extends Component {
 			  (data)=>{
 				  console.log(data);
 			  this.setState({
-                  street: 'moshe',
+                  street: data[0].street,
 				  number: data[0].number,
 				  city: data[0].city,
 				  date: data[0].date,

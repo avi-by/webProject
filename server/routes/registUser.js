@@ -69,6 +69,22 @@ db.initialize(
       });
     });
 
+    app.put("/UpdateAddress/:id", (req,res)=>{
+      const itemId = request.params.id;
+      const item = request.body;
+      dbCollection.updateOne(
+        {oktaID: itemId},
+        {$set: item},
+        (error, result) => {
+          if (error) throw error;
+          // send back entire updated list, to make sure frontend data is up-to-date
+          dbCollection.find().toArray(function(_error, _result) {
+            if (_error) throw _error;
+            response.json(_result);
+          });
+        }
+      );
+    })
     //<< you can update a record  by giving  id of the record and the  data in the  PUT request should be the key values and values you want to update in this record>>
     app.put("/UpdateRecord/:id", (request, response) => {
       const itemId = request.params.id;

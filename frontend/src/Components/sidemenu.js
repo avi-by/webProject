@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import clsx from "clsx";
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -80,11 +80,80 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0
   }
 }));
+const VolunteerItems = () => {
+  let history = useHistory();
+  const { authState, authService } = useOktaAuth();
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    if (!authState.isAuthenticated) {
+      // When user isn't authenticated, forget any user info
+      setUserInfo(null);
+    } else {
+      authService.getUser().then(info => {
+        setUserInfo(info);
+      });
+    }
+  }, [authState, authService]); // Update if authState changes
+
+
+  if (authState.isAuthenticated && userInfo && !userInfo.user.admin) {
+    return (
+      <React.Fragment>
+
+
+
+        <ListItem
+          button
+          key={"myjobs"}
+          onClick={() => {history.push("/myjobs");}}>
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"מטלות שלי"} />
+        </ListItem>
+
+
+        <ListItem
+                  button
+                  key={"chatMessages"}
+                  onClick={() => {
+                    history.push("/chatUser");
+                  }}
+                >
+                  <ListItemIcon>
+                    <PeopleIcon />{" "}
+                  </ListItemIcon>
+                  <ListItemText primary={"chat"} />
+                </ListItem>
+
+      </React.Fragment>
+    );
+  } else {
+    return <div />;
+  }
+};
+
 
 const AdminItems = () => {
   let history = useHistory();
-  const {authState, authService} = useOktaAuth();
-  if (authState.isAuthenticated) {
+  const { authState, authService } = useOktaAuth();
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    if (!authState.isAuthenticated) {
+      // When user isn't authenticated, forget any user info
+      setUserInfo(null);
+    } else {
+      authService.getUser().then(info => {
+        setUserInfo(info);
+      });
+    }
+  }, [authState, authService]); // Update if authState changes
+
+    console.log(authState);
+  console.log(userInfo);
+  if (authState.isAuthenticated && userInfo && userInfo.user.admin) {
     return (
       <React.Fragment>
         <ListItem
@@ -119,6 +188,16 @@ const AdminItems = () => {
 
         <ListItem
           button
+          key={"jobs"}
+          onClick={() => {history.push("/jobs");}}>
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"מטלות לביצוע"} />
+        </ListItem>
+
+        <ListItem
+          button
           key={"addAdress"}
           onClick={() => {
             history.push("/addAddress");
@@ -140,6 +219,19 @@ const AdminItems = () => {
             <PeopleIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"list of addresses"} />
+        </ListItem>
+
+        <ListItem
+          button
+          key={"chatMessages"}
+          onClick={() => {
+            history.push("/chatUser");
+          }}
+        >
+          <ListItemIcon>
+            <PeopleIcon />{" "}
+          </ListItemIcon>
+          <ListItemText primary={"chat"} />
         </ListItem>
       </React.Fragment>
     );
@@ -209,7 +301,7 @@ export default function PersistentDrawerLeft() {
 
         <List>
 
-
+          <VolunteerItems />
           <AdminItems />
           <ListItem
             button

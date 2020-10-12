@@ -112,6 +112,7 @@ class AddAddress extends Component {
     }
 
     render() {
+      
         const { id, street, number, city, date } = this.state
         return (
             <Wrapper>

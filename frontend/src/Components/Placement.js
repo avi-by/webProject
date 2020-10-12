@@ -132,22 +132,51 @@ class Placement extends Component {
     }).then(res => {
       res.json().then(value => {
         console.log(value);
-        var arr =[];
-        var index =0;
+        var arr = [];
+        var index = 0;
         for (let user of this.state.users) {
           if (!user.admin) {
-console.log("user is:    ",user);
-            arr.push({user:user,locations:value[index++]})
-            console.log("arr after push is:",arr);
+            console.log("user is:    ", user);
+            arr.push({user: user, locations: value[index++]});
+            console.log("arr after push is:", arr);
+          }
         }
-        }
-        console.log("arr is   :",arr);
+        console.log("arr is   :", arr);
         this.setState({
           group: arr
         });
       });
     });
   };
+  sendButtonHandle = async () => {
+    this.state.group.forEach((item, i) => {
+      var user = {oktaID:item.user.oktaID};
+      user.locations =[];
+      for (var j = 0; j < item.locations.cluster.length; j++) {
+        user.locations.push(this.state.tableaddresses[item.locations.clusterInd[j]])
+      }
+       fetch(`/usersdb/UpdateRecord/${user.oktaID}`, {
+        method: "PUT",
+        body: JSON.stringify(user),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }).then(response => {
+        window.alert(`users updated successfully`);
+        this.setState({
+
+          tableaddresses: this.state.addresses,
+
+
+          selectedCity: "",
+          locations: [],
+          group: []
+        })
+      })
+    });
+
+    }
   render() {
     const columns = [
       {
@@ -214,7 +243,16 @@ console.log("user is:    ",user);
           </Row>
           <Row className="justify-content-md-center">
             {this.state.selectedCity ? (
+              <Col>
               <LoadingButton function={this.placementButtonHandle} />
+              </Col>
+            ) : (
+              <div />
+            )}
+            {this.state.group.length>0? (
+              <Col>
+              <Button onClick={this.sendButtonHandle }variant="success" >אשר חלוקה</Button>
+              </Col>
             ) : (
               <div />
             )}
