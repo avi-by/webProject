@@ -16,6 +16,11 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import LogButton from "./LoginButton";
 import PeopleIcon from "@material-ui/icons/People";
+import HomeIcon from '@material-ui/icons/Home';
+import AddLocationIcon from '@material-ui/icons/AddLocation';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ChatIcon from '@material-ui/icons/Chat';
+import AddIcon from '@material-ui/icons/Add';
 import {useHistory} from "react-router-dom";
 import {useOktaAuth} from "@okta/okta-react";
 
@@ -108,7 +113,7 @@ const VolunteerItems = () => {
           key={"myjobs"}
           onClick={() => {history.push("/myjobs");}}>
           <ListItemIcon>
-            <PeopleIcon />{" "}
+            <LocationOnIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"My Addresses"} />
         </ListItem>
@@ -122,7 +127,7 @@ const VolunteerItems = () => {
                   }}
                 >
                   <ListItemIcon>
-                    <PeopleIcon />{" "}
+                    <ChatIcon />{" "}
                   </ListItemIcon>
                   <ListItemText primary={"Chat"} />
                 </ListItem>
@@ -161,7 +166,7 @@ const AdminItems = () => {
           key={"additem"}
           onClick={() => {history.push("/adduser");}}>
           <ListItemIcon>
-            <PeopleIcon />{" "}
+            <AddIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"Add Volunteer"} />
         </ListItem>
@@ -191,7 +196,7 @@ const AdminItems = () => {
           key={"jobs"}
           onClick={() => {history.push("/jobs");}}>
           <ListItemIcon>
-            <PeopleIcon />{" "}
+            <LocationOnIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"Current placment"} />
         </ListItem>
@@ -204,7 +209,7 @@ const AdminItems = () => {
           }}
         >
           <ListItemIcon>
-            <PeopleIcon />{" "}
+            <AddLocationIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"Add Address"} />
         </ListItem>
@@ -216,7 +221,7 @@ const AdminItems = () => {
           }}
         >
           <ListItemIcon>
-            <PeopleIcon />{" "}
+            <LocationOnIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"List of the addresses"} />
         </ListItem>
@@ -229,7 +234,7 @@ const AdminItems = () => {
           }}
         >
           <ListItemIcon>
-            <PeopleIcon />{" "}
+            <ChatIcon />{" "}
           </ListItemIcon>
           <ListItemText primary={"Chat"} />
         </ListItem>
@@ -273,7 +278,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            ניהול אספקה בעת הקורונה
+            Supplies Managmanet at the COVID
           </Typography>
           <LogButton />
 
@@ -300,9 +305,6 @@ export default function PersistentDrawerLeft() {
         </div>
 
         <List>
-
-          <VolunteerItems />
-          <AdminItems />
           <ListItem
             button
             key={"home"}
@@ -311,10 +313,13 @@ export default function PersistentDrawerLeft() {
             }}
           >
             <ListItemIcon>
-              <PeopleIcon />{" "}
+              <HomeIcon />{" "}
             </ListItemIcon>
             <ListItemText primary={"homepage"} />
           </ListItem>
+
+          <VolunteerItems />
+          <AdminItems />
         </List>
       </Drawer>
       <main

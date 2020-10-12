@@ -24,7 +24,7 @@ import VolunteerJobs from "./Components/VolunteerJobs";
 import Chat from './chat';
 import Welcome from './welcome';
 import './style.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Home from './Components/header';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -42,8 +42,8 @@ class App extends Component {
 
             <Switch>
               <Route path={config.CALLBACK_PATH} component={LoginCallback} />
-              <Route exact path="/">
-                home
+              <Route exact path="/" component={Home}>
+
               </Route>
               <Route exact path="/adduser" component={AddUser} />
               <Route exact path="/userlist" component={UsersList} />
